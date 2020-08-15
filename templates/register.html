@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% load crispy_forms_tags  %}
+<div class = "col-md-6 offset-md-3">
+
+<h3>KAYIT OL</h3>
+
+<hr>
+
+        <div class = "jumbotron text-center">
+
+
+
+                <form method="post">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <button type ="submit" class="btn btn-primary">Kayıt Ol</button>
+                </form>
+        
+        </div>
+
+</div>
+
+{% endblock body %}
+
+

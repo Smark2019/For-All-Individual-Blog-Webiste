@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+<div class = "col-md-8 offset-md-2" >
+<h3>Kontrol Paneli</h3>
+<hr>
+<h5>Hoşgeldiniz {{request.user.username}}</h5>
+<hr>
+
+<a class= "btn btn-danger"href="{% url 'article:addarticle' %}">Yeni Makale Ekle</a>
+<br>
+<br>
+{% if articles %}
+<table class="table">
+            <thead class="thead-dark">
+                <tr>
+                
+                <th scope="col">Başlık</th>
+                <th scope="col">Yazar</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Güncelle</th>
+                <th scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles  %}
+                        
+                
+                    <tr>
+                    
+                    <td><a href="{% url 'article:detail' article.id %}">{{article.title}}</a></td>
+                    <td>{{article.author}}</td>
+                    <td>{{article.created_date}}</td>
+                    <td><a href="{% url 'article:update' article.id %}" class="btn btn-primary">Güncelle</a></td>
+                    <td><a href="{% url 'article:delete' article.id %}" class="btn btn-danger">Sil</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+</table>
+{% else %}
+<div class = "alert alert-danger">Gösterilecek Bir Makaleniz Yok, Ama Hemen Yukarıdan YENİ MAKALE Ekleyebilirsiniz.</div>
+
+{% endif %}
+
+</div>
+{% endblock body %}

@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class = "jumbotron text-center">
+
+    <header class="masthead text-white text-center">
+        
+        <div class="overlay"></div>
+        <div class="container" >
+            <h1 style="color: rgb(32, 28, 28);"> Blog Sayfama Hoşgeldiniz !</h1>
+          <div class="row">
+            <div class="col-xl-9 mx-auto" >
+                {% if request.user.is_authenticated %}
+                   
+                {% else %}
+                    <h1 class="mb-5" style="color: rgb(32, 28, 28);">...Hemen Katıl , Yeter ki PAYLAŞ...</h1>
+                    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                        <form>
+                          <div class="form-row">
+                            
+                            <div class="col-12 col-md-14">
+                              <button type="submit" formaction="{% url 'user:register'%}" class="btn btn-block btn-lg btn-primary"> <a style="color: rgb(255, 255, 255); ;">HEMEN KAYIT OL</a></button>
+                                <br>
+                                <br>
+                              <div class = "alert alert-warning">
+                                 HENÜZ KAYITLI DEĞİLSİNİZ ya da GİRİŞ YAPMADINIZ :(
+                        </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    
+
+                {% endif %}
+              
+            </div>
+            
+          </div>
+        </div>
+      </header>
+
+        
+        <!-- > <p>MERHABA ARKADAŞLAR , SAYFAMIZ YAPIM AŞAMASINDADIR !</p> -->
+
+       
+    
+    
+
+
+<p>
+    <br>
+    <br>
+    
+
+
+
+</p>
+</div>
+<h1>Makaleler</h1>
+
+
+{% if articles %}
+<form class="form-inline mr-auto">
+<!--{% csrf_token %}
+  <input class="form-control mr-sm-2" name ="keyword" type="text" style="width: 300px; height: 40px;" placeholder="Ne Aramıştınız?" aria-label="Search">
+  <button class="btn btn-outline-primary btn-rounded btn-sm my-5" style="width: 80px; height: 40px" type="submit">Ara</button>
+</form> -->
+
+{% for article in articles  %}
+<div class="row">
+
+      <!-- Post Content Column -->
+    <div class="col-lg-11">
+
+        <!-- Title -->
+        <h2 class="mt-4" ><a href="{% url 'article:detail' article.id %}">{{article.title}}</a></h2>
+                                  
+        <!-- Author -->
+        <p class="lead">
+          
+          {{article.author}} tarafından {{article.created_date}} tarihinde yayınlandı.
+        </p>
+
+          
+
+        <hr>
+
+        <!-- Preview Image -->
+        {% if article.article_image %}
+        
+        <a href="{% url 'article:detail' article.id %}"><img class="img-fluid rounded"  src="{{article.article_image.url}}" alt=""></a>
+        {% endif %}
+        
+
+        <hr>
+
+         
+        <p class="lead">{{article.content|safe|truncatewords:75}} </p>
+        <hr>
+        <a style="float:  right " class="btn btn-primary" href="{% url 'article:detail' article.id %}">Devamını Oku</a>
+        
+ 
+        
+
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+
+
+{% else %}
+<div class="row">
+
+      <!-- Post Content Column -->
+    <div class="col-lg-7">
+<div class = "alert alert-danger">
+        MAKALE BULUNAMADI  :(
+</div>
+</div>
+</div>
+{% endif %}
+
+{% endblock body %}
