@@ -1,4 +1,4 @@
-# Blog Webiste - Open for everyone 
+# Blog Websste - Open for everyone 
 ## Link below 
 
 https://saliharkanoz.pythonanywhere.com/
